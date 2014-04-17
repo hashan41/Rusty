@@ -1,4 +1,4 @@
-# RUSTY Servlet Filter for Restful web services
+# RUSTY Servlet Filter and Client Request Handler for Restful web services
 
 ## Overview
 
