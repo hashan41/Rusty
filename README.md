@@ -1,4 +1,7 @@
-Rusty
-=====
+Servlet filter for Restful web service interface. Filter requests by request destinations, users. Response of web service can encrypt for selected webservices or all. Configurations has to be define in rusty-config file. Client side of rusty has feature to prevent web service replay attacks and decrypt data of web service if secured. 
 
-Security Filter and Client side request handler for Restful Web Services  -----Facilities------------  -Encrypted data in transport layer -Manage Destinations (IP s and Domains) of accessing web service -Manage Users of accessing web service -Prevent X HR Replay Attacks -Prevent Man in Middle Attack -Auto Logging web service requests and responses with headers -Secure only selected web services (can manage by rusty-config.xml)
+Users and destination management is highly customizable and currently those have to define in rusty-config.xml
+
+We are looking forward to integrate LDAP or any other database to manage users and destinations.
+
+
