@@ -94,8 +94,39 @@ We are looking forward to integrate LDAP or any other database to manage users a
      `</allowed-services>`
  `</destination>`
 
+### Rusty Client Request handler
 
+* **Authenticate Requests**
+ Add RustyRequestHandler.jsp to your client Application.
+ Define encryption key, Web Service path and uname, password of application user.
 
+    `String encryptionKey = "rustykey12345678";`
+    `String rustyUname = "admin";`
+    `String rustypassword = "admin";`
+    `String wsPath = "http://192.0.0.31/SecureRest/rest/";`
+    
+ That's it. you are now configured your client side Rusty Request Handler.
+ 
+* **Send Request from Client Application** 
+
+ `$.ajax({`
+     `url: "RustyRequestHandler.jsp?path=assets/getassets&ruid=" + generateUUID() + "",`
+     `type: "GET",`
+     `success: function() {},`
+     `error: function() {}`
+ `});`
+ `function generateUUID() {`
+     `var d = new Date().getTime();`
+     `var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {`
+       `var r = (d + Math.random() * 16) % 16 | 0;`
+       `d = Math.floor(d / 16);`
+       `return (c == 'x' ? r : (r & 0x7 | 0x8)).toString(16);`
+     `});`
+     `return uuid;`
+ `}`
+ 
+ Call your web services by client application using path="your web service path". We are using UUID mechanism to prevent  Replay attacks. You can use your own implementation to generate ID.
+ 
 ## Features
 
 * **Easy to use**  
