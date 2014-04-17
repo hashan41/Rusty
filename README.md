@@ -14,6 +14,9 @@ We are looking forward to integrate LDAP or any other database to manage users a
 
 ## Features
 
+* **Easy to use**  
+ Call rusty filter and define configurations in rusty-config.xml
+
 * **Integrate with any servlet container**  
  Can Integrate in any Java Application server with servlet container
 
