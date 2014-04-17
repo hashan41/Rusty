@@ -14,16 +14,16 @@ We are looking forward to integrate LDAP or any other database to manage users a
  Download Rusty.jar and add to library.
 
 * **Add Web filter annotation to URL**  
- @WebFilter("/rest/*")
- public class SecureGET implements Filter {
+ `@WebFilter("/rest/*")`
+ `public class SecureGET implements Filter {`
 
  Implement javax.servlet.Filter with your java class. Override init, doFilter and destroy methods in Filter interface.
  
 * **Override doFilter() Method**
- @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,    ServletException {
-        Rusty.initRustyFilter(request, response, chain);
-    }
+ `@Override`
+    `public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,    ServletException {`
+        `Rusty.initRustyFilter(request, response, chain);`
+    `}`
  That's It. You are now implemented Rusty Filter to your Rest Web service Interface. Now Lets Start with Rusty Configurations.
 
 ### rusty-config.xml
@@ -32,37 +32,37 @@ We are looking forward to integrate LDAP or any other database to manage users a
  
  rusty-config.xml must place under rusty folder in WEB-INF.
  
- WEB-INF
- -rusty
-  -rusty-config.xml
+ > WEB-INF
+>  -rusty
+>   -rusty-config.xml
 
 * **Encryption Enabling**
- <encryption active="true" apply="*">
-     <key>rustykey12345678</key>
- </encryption>
+ `<encryption active="true" apply="*">`
+     `<key>rustykey12345678</key>`
+ `</encryption>`
  
  If you need to encrypt all you responses add attribute apply="*" in encryption tag.
  
  If you need to encrypt responses of selected services then use apply="~" in ancryption tag.
  
  If you need your service to be secure use secured="true"
- <service-item secured="true">/assets/getassets</service-item> 
+ `<service-item secured="true">/assets/getassets</service-item>` 
 
  If you don't care about securing your service secured="false" or do not add "secured" attribute
  
- <service-item secured="false">/assets/getunsecureassets</service-item> 
+ `<service-item secured="false">/assets/getunsecureassets</service-item> `
  
 * **User Access Management** 
  
- <user-management active="true">
-     <management-type>custom</management-type>
-     <connection-string></connection-string>
-     <users>
-        <user username="hashan41" password="hashan41"></user>
-        <user username="admin" password="admin"></user>
-        <user username="dmsadmin" password="dmsadmin"></user>
-     </users>
- </user-management>
+ `<user-management active="true">`
+     `<management-type>custom</management-type>`
+     `<connection-string></connection-string>`
+     `<users>`
+        `<user username="hashan41" password="hashan41"></user>`
+        `<user username="admin" password="admin"></user>`
+        `<user username="dmsadmin" password="dmsadmin"></user>`
+     `</users>`
+ `</user-management>`
  
  Add active="true" to active Rusty user access management.
  
@@ -75,24 +75,24 @@ We are looking forward to integrate LDAP or any other database to manage users a
 
  You can define which IP or domain can access web services. ex : 192.0.0.31 can only access those 4 web services.
  
- <destination>
-    <ip>192.0.0.31</ip>
-    <allowed-services>
-        <service>/assets/getassets</service> 
-        <service>/assets/getunsecureassets</service> 
-        <service>/assets/postassets</service> 
-        <service>/assets/putassets</service> 
-    </allowed-services>
- </destination>
+ `<destination>`
+    `<ip>192.0.0.31</ip>`
+    `<allowed-services>`
+        `<service>/assets/getassets</service> `
+        `<service>/assets/getunsecureassets</service> `
+        `<service>/assets/postassets</service> `
+        `<service>/assets/putassets</service> `
+    `</allowed-services>`
+ `</destination>`
  
  If you want to give 192.0.0.31 to access all services,
  
- <destination>
-     <ip>192.0.0.31</ip>
-     <allowed-services>
-         *
-     </allowed-services>
- </destination>
+ `<destination>`
+     `<ip>192.0.0.31</ip>`
+     `<allowed-services>`
+         `*`
+     `</allowed-services>`
+ `</destination>`
 
 
 
@@ -135,4 +135,3 @@ We are looking forward to integrate LDAP or any other database to manage users a
 
 ## License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
-
