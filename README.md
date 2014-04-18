@@ -135,7 +135,7 @@ If auth="false" in `<user-management active="true">` mode means service don't ne
 * **Prevent Man in Middle Attack**  
  No one can sniff or grab data in transport layer. All data is encrypted before send it to web service layer and response also encrypted.
 
-* **Enterprise Ready**  
+* **Processing Speed**  
  Rusty request handler can process multiple requests at time
 
 
