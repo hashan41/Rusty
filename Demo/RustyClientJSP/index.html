@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Rusty JSP Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                $("#getUnsecureUsers").click(function() {
+                    $.ajax({
+                        //Define @Path("/getUnSecureUsers") to path
+                        url: "RustyRequestHandler.jsp?path=getUnSecureUsers&ruid=" + generateUUID() + "",
+                        type: "GET",
+                        success: function() {
+                            alert("UnSecure Users Loaded Follow Below Steps to View Results....");
+                        },
+                        error: function() {
+                            alert("Error....");
+                        }
+                    });
+                });
+                
+                $("#getSecureUsers").click(function() {
+                    $.ajax({
+                        //Define @Path("/getSecureUsers") to path
+                        url: "RustyRequestHandler.jsp?path=getSecureUsers&ruid=" + generateUUID() + "",
+                        type: "GET",
+                        success: function() {
+                            alert("Secure Users Loaded Follow Below Steps to View Results....");
+                        },
+                        error: function() {
+                            alert("Error....");
+                        }
+                    });
+                });
+            });
+
+            function generateUUID() {
+                var d = new Date().getTime();
+                var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = (d + Math.random() * 16) % 16 | 0;
+                    d = Math.floor(d / 16);
+                    return (c == 'x' ? r : (r & 0x7 | 0x8)).toString(16);
+                });
+                return uuid;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Rusty Client Demo with JSP Request Handler</h1>
+        <button id="getUnsecureUsers">Get Un secure Users WS</button>
+        <p>Actual Response send by web service. No Encryption Applied. Faster than Secured Service.</p>
+        <button id="getSecureUsers">Get Secure Users WS</button>
+        <p>Encrypted Response send by web service. Decryption Done by RustyRequestHandler.jsp</p>
+        <div>
+            <ul>
+                <li>Press F12 to open Developer Tools in Chrome.</li>
+                <li>Click Network tab to capture requests</li>
+                <li>Try Replay Service using developer tools</li>
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rusty>
+    <security>
+        <encryption active="true" apply="~">
+            <key>rustykey12345678</key>
+        </encryption>
+        <user-management active="true">
+            <management-type>custom</management-type>
+            <connection-string></connection-string>
+            <users>
+                <user username="admin" password="admin"></user>
+                <user username="rustyAdmin" password="rustyAdmin"></user>
+            </users>
+        </user-management>
+    </security>
+    <whitelist>
+        <destination>
+            <ip>192.0.0.31</ip>
+            <allowed-services>
+                <service>/rustyDemo/getUnSecureUsers</service> 
+                <service>/rustyDemo/getSecureUsers</service> 
+            </allowed-services>
+        </destination>
+        <destination>
+            <ip>192.0.0.32</ip>
+            <allowed-services>
+                *
+            </allowed-services>
+        </destination>
+        <destination>  
+            <ip>192.0.0.70</ip>          
+            <allowed-services>
+                *
+            </allowed-services>
+        </destination>
+    </whitelist>
+    <service-list>
+        <service-item secured="true" auth="true">/rustyDemo/getSecureUsers</service-item> 
+        <service-item secured="true" auth="false">/rustyDemo/getUnSecureUsers</service-item> 
+    </service-list>
+</rusty>
