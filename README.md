@@ -1,4 +1,4 @@
-# RUSTY Servlet Filter and Client Request Handler for Restful web services
+# RUSTY Servlet Filter for Restful web services
 
 ## Overview
 
@@ -14,8 +14,8 @@ We are looking forward to integrate LDAP or any other database to manage users a
  Download Rusty.jar and add to library.
 
 * **Add Web filter annotation to URL**  
- `@WebFilter("/rest/*")`
- `public class SecureGET implements Filter {`
+ `@WebFilter("/rest/rustyDemo/*")`
+ `public class RustyDemoService implements Filter{`
 
  Implement javax.servlet.Filter with your java class. Override init, doFilter and destroy methods in Filter interface.
  
@@ -45,12 +45,20 @@ We are looking forward to integrate LDAP or any other database to manage users a
  
  If you need to encrypt responses of selected services then use apply="~" in ancryption tag.
  
- If you need your service to be secure use secured="true"
- `<service-item secured="true">/assets/getassets</service-item>` 
+ If you need your service to be secure(Encrypt Response) use secured="true"
+ auth="true" make service authenticate. Request need to have valid username and password to access this web service. If `<user-management active="true">` you don't need to add attribute by default service need valid credentials to access service.
+
+ `<service-item secured="true" auth="true">/rustyDemo/getSecureUsers</service-item>` 
+
+Or
+
+`<service-item secured="true" auth="false">/rustyDemo/getUnSecureUsers</service-item>`
+
+If auth="false" in `<user-management active="true">` mode means service don't need credentials to access the service. If `<user-management active="false">` by default all services don't need credentials.
 
  If you don't care about securing your service secured="false" or do not add "secured" attribute
  
- `<service-item secured="false">/assets/getunsecureassets</service-item> `
+ `<service-item secured="false">/rustyDemo/getUnSecureUsers</service-item> `
  
 * **User Access Management** 
  
@@ -58,9 +66,8 @@ We are looking forward to integrate LDAP or any other database to manage users a
      `<management-type>custom</management-type>`
      `<connection-string></connection-string>`
      `<users>`
-        `<user username="hashan41" password="hashan41"></user>`
         `<user username="admin" password="admin"></user>`
-        `<user username="dmsadmin" password="dmsadmin"></user>`
+        `<user username="rustyAdmin" password="rustyAdmin"></user>`
      `</users>`
  `</user-management>`
  
@@ -78,55 +85,22 @@ We are looking forward to integrate LDAP or any other database to manage users a
  `<destination>`
     `<ip>192.0.0.31</ip>`
     `<allowed-services>`
-        `<service>/assets/getassets</service> `
-        `<service>/assets/getunsecureassets</service> `
-        `<service>/assets/postassets</service> `
-        `<service>/assets/putassets</service> `
+        `<service>/rustyDemo/getUnSecureUsers</service> `
+        `<service>/rustyDemo/getSecureUsers</service> `
     `</allowed-services>`
  `</destination>`
  
  If you want to give 192.0.0.31 to access all services,
  
  `<destination>`
-     `<ip>192.0.0.31</ip>`
-     `<allowed-services>`
-         `*`
-     `</allowed-services>`
+      `<ip>192.0.0.31</ip>`
+      `<allowed-services>`
+          `*`
+      `</allowed-services>`
  `</destination>`
 
-### Rusty Client Request handler
 
-* **Authenticate Requests**
- Add RustyRequestHandler.jsp to your client Application.
- Define encryption key, Web Service path and uname, password of application user.
 
-    `String encryptionKey = "rustykey12345678";`
-    `String rustyUname = "admin";`
-    `String rustypassword = "admin";`
-    `String wsPath = "http://192.0.0.31/SecureRest/rest/";`
-    
- That's it. you are now configured your client side Rusty Request Handler.
- 
-* **Send Request from Client Application** 
-
- `$.ajax({`
-     `url: "RustyRequestHandler.jsp?path=assets/getassets&ruid=" + generateUUID() + "",`
-     `type: "GET",`
-     `success: function() {},`
-     `error: function() {}`
- `});`
- `function generateUUID() {`
-     `var d = new Date().getTime();`
-     `var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {`
-       `var r = (d + Math.random() * 16) % 16 | 0;`
-       `d = Math.floor(d / 16);`
-       `return (c == 'x' ? r : (r & 0x7 | 0x8)).toString(16);`
-     `});`
-     `return uuid;`
- `}`
- 
- Call your web services by client application using path="your web service path". We are using UUID mechanism to prevent  Replay attacks. You can use your own implementation to generate ID.
- 
 ## Features
 
 * **Easy to use**  
