@@ -8,6 +8,14 @@ Users and destination management is highly customizable and currently those have
 
 We are looking forward to integrate LDAP or any other database to manage users and destinations.
 
+## Demo Setup instructions
+
+Rusty Demo Service and Client Application is in Demo folder.
+
+1. Rusty Service Demo is Web Project developed using Netbeans 7.4. Deploy Project in Any Java Application server. and add Rusty.jar before build the project.
+2. Rusty Client Application has to deploy or place it in ROOT.war folder(need a .jsp deployer) and run Client Application
+
+
 ## Setup instructions
 
 * **Download Rusty.jar**  
